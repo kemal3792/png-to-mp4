@@ -28,8 +28,8 @@ def create_video_from_images(directory, output_path, resolution=(1280, 720), dur
     clip.write_videofile(output_path, codec="libx264", fps=30)
 
 # Kullanım örneği
-directory_path = r'C:\Users\BARAN\Desktop\etsy-products\animals\cat\test2'
-output_video_path = r'C:\Users\BARAN\Desktop\etsy-products\animals\cat\output_video.mp4'
+directory_path = r'C:\...\test2'
+output_video_path = r'C:\...\output_video.mp4'
 resolution = (1280, 720)  # video resolution
 duration_per_image = 0.8  # Duration for each image (seconds)
 background_color = (255, 255, 255)  # White background
