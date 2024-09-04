@@ -5,29 +5,29 @@ from moviepy.editor import ImageSequenceClip
 from PIL import Image
 
 def create_video_from_images(directory, output_path, resolution=(1280, 720), duration=0.5, bg_color=(255, 255, 255)):
-    # PNG dosyalarını bul
+    # Find PNG files
     png_files = glob(os.path.join(directory, '**', '*.png'), recursive=True)
 
-    # Görüntüleri işle
+    # Process images
     images = []
     for file in png_files:
         img = Image.open(file).convert("RGBA")
         
-        # Yeni arka plan ile canvas oluştur
+        # Create canvas with new background
         canvas = Image.new("RGBA", resolution, bg_color + (255,))
         img.thumbnail(resolution, Image.Resampling.LANCZOS)
         img_position = ((canvas.width - img.width) // 2, (canvas.height - img.height) // 2)
         canvas.paste(img, img_position, img)
 
-        # RGB formatına dönüştür (RGBA -> RGB)
+        # Convert to RGB format (RGBA -> RGB)
         canvas = canvas.convert("RGB")
         images.append(np.array(canvas))  # NumPy dizisine dönüştür
 
-    # Video oluşturma
+    # Creating videos
     clip = ImageSequenceClip(images, fps=1/duration)
     clip.write_videofile(output_path, codec="libx264", fps=30)
 
-# Kullanım örneği
+# Usage example
 directory_path = r'C:\...\test2'
 output_video_path = r'C:\...\output_video.mp4'
 resolution = (1280, 720)  # video resolution
